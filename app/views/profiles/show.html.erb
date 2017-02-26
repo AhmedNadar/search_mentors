@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First Name:</strong>
+  <%= @profile.first_name %>
+</p>
+
+<p>
+  <strong>last Name:</strong>
+  <%= @profile.last_name %>
+</p>
+
+<p>
+  <%= @profile.user.email %>
+</p>
+
+<p>
+  <%= image_tag @profile.avatar.url(:thumb) %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @profile.company %>
+</p>
+
+<p>
+  <strong>Summery</strong>
+  <%= @profile.summery %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @profile.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @profile.country %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
+
+ <p>
+  <strong>Skills:</strong>
+    <%= @profile.skills.map(&:name).join(', ') %>
+</p>
+
+ <p>
+  <strong>Jobs:</strong>
+    <%= @profile.jobs.map(&:name).join(', ') %>
+</p>
+
+ <p>
+  <strong>Industries:</strong>
+    <%= @profile.industries.map(&:name).join(', ') %>
+</p>
+
+<!-- <p>
+  <strong>Skills:</strong>
+  <%#= @profile.skills.each do |skill| %>
+    <%#= skill.name %>
+  <%# end %>
+</p>
+ -->
+<% if user_signed_in? %>
+  <% if @profile.user_id == current_user.id %>
+    <%= link_to 'Edit my profile', edit_profile_path %> |
+  <% end %>
+<% end %>
+<%= link_to 'Back', profiles_path %>
