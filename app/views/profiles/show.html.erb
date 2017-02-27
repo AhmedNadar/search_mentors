@@ -1,73 +1,95 @@
-<p id="notice"><%= notice %></p>
+<%= content_for :page_title, @profile.first_name.capitalize + " profile"%>
+<article id="profile" class="profile">
+  <div class="row">
+    <h2 class="page-header">Welcome, <%= @profile.first_name.capitalize %> </h2>
+  </div>
+  <div class="row">
+    <section class="left-side">
+      <div class="col-md-3">
+          <%= image_tag @profile.avatar.url(:medium), class:"avatar" %>
+        <h3><%= fullname %></h3>
+        <h4>Works at: <%= @profile.company.capitalize %></h4>
 
-<p>
-  <strong>First Name:</strong>
-  <%= @profile.first_name %>
-</p>
+        <% if user_signed_in? %>
+          <% if @profile.user_id == current_user.id %>
+            <%= link_to 'Edit my profile', edit_profile_path, class:"btn btn-info", role:"button" %>
+          <% end %>
+        <% end %>
 
-<p>
-  <strong>last Name:</strong>
-  <%= @profile.last_name %>
-</p>
+      </div>
+    </section>
 
-<p>
-  <%= @profile.user.email %>
-</p>
+    <section class="right-side">
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h3>About...</h3></div>
 
-<p>
-  <%= image_tag @profile.avatar.url(:thumb) %>
-</p>
+          <!-- List group -->
+          <ul class="list-group">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td style="width: 20%;"><strong>Email:</strong></td>
+                  <td><%=mail_to @profile.user.email %></td>
+                </tr>
+                <tr>
+                  <td style="width: 20%;"><strong>City:</strong></td>
+                  <td><%= @profile.city.capitalize %></td>
+                </tr>
+                <tr>
+                  <td style="width: 20%;"><strong>Country:</strong></td>
+                  <td><%= @profile.country.capitalize %></td>
+                </tr>
+                <tr>
+                  <td style="width: 20%;"><strong>Gender:</strong></td>
+                  <td><%= @profile.gender.capitalize %></td>
+                </tr>
+              </tbody>
+            </table>
+          </ul>
+        </div>
 
-<p>
-  <strong>Company:</strong>
-  <%= @profile.company %>
-</p>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h3>Summery</h3></div>
+          <div class="panel-body">
+            <p><%= @profile.summery %></p>
+          </div>
+          <!-- List group -->
+        </div>
 
-<p>
-  <strong>Summery</strong>
-  <%= @profile.summery %>
-</p>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h3>Skills</h3></div>
+          <div class="panel-body">
+            <p><%= @profile.skills.map(&:name).join(' , ') %></p>
+          </div>
+          <!-- List group -->
+        </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @profile.city %>
-</p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @profile.country %>
-</p>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h3>Jobs</h3></div>
+          <div class="panel-body">
+            <p> <%= @profile.jobs.map(&:name).join(' , ') %></p>
+          </div>
+          <!-- List group -->
+        </div>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @profile.gender %>
-</p>
 
- <p>
-  <strong>Skills:</strong>
-    <%= @profile.skills.map(&:name).join(', ') %>
-</p>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h3>Skills</h3></div>
+          <div class="panel-body">
+            <p><%= @profile.industries.map(&:name).join(' , ') %></p>
+          </div>
+          <!-- List group -->
+        </div>
 
- <p>
-  <strong>Jobs:</strong>
-    <%= @profile.jobs.map(&:name).join(', ') %>
-</p>
 
- <p>
-  <strong>Industries:</strong>
-    <%= @profile.industries.map(&:name).join(', ') %>
-</p>
-
-<!-- <p>
-  <strong>Skills:</strong>
-  <%#= @profile.skills.each do |skill| %>
-    <%#= skill.name %>
-  <%# end %>
-</p>
- -->
-<% if user_signed_in? %>
-  <% if @profile.user_id == current_user.id %>
-    <%= link_to 'Edit my profile', edit_profile_path %> |
-  <% end %>
-<% end %>
-<%= link_to 'Back', profiles_path %>
+      </div>
+    </section>
+  </div>
+</article>

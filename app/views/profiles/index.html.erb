@@ -13,6 +13,7 @@
       <th>Country</th>
       <th>Gender</th>
       <th>Avatar</th>
+      <th>skills</th>
       <th colspan="5"></th>
     </tr>
   </thead>
@@ -27,6 +28,12 @@
         <td><%= profile.city %></td>
         <td><%= profile.country %></td>
         <td><%= profile.gender %></td>
+        <td>
+          <% profile.skills.each do |skill| %>
+            <%= skill.name %>
+          <% end %>
+
+        </td>
         <td><%= image_tag profile.avatar.url(:thumb) %></td>
         <td><%= link_to 'Show Profile', profile_path(profile) %></td>
       </tr>

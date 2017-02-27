@@ -7,32 +7,22 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    @profiles = @profiles.first_name(params[:first_name]) if params[:first_name].present?
+    # @profiles = @profiles.skills(params[:skills]) if params[:skills].present?
   end
 
-  # GET /profiles/1
-  # GET /profiles/1.json
   def show
   end
 
-  # GET /profiles/new
   def new
     # @profile = Profile.new
     @profile = current_user.profiles.build
   end
 
-  # GET /profiles/1/edit
   def edit
   end
-
-  # POST /profiles
-  # POST /profiles.json
   def create
     @profile = current_user.profile.build(profile_params)
-
-    # if user_signed_in?
-    #   @profile.user_id = current_user.id
-    # end
-
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
@@ -44,8 +34,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /profiles/1
-  # PATCH/PUT /profiles/1.json
   def update
     respond_to do |format|
       if @profile.update(profile_params)
@@ -58,8 +46,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # DELETE /profiles/1
-  # DELETE /profiles/1.json
   def destroy
     @profile.destroy
     respond_to do |format|
@@ -72,15 +58,13 @@ class ProfilesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])
-      # @profile = params[:id] == @profile ? @profile : Profile.find(params[:id])
-      # if user_signed_in?
-      #   @profile = current_user.profile
-      # end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:summery, :city, :country, :gender, :first_name, :last_name, :company, :user_id , :avatar ,{skill_ids: [], job_ids: [], industry_ids: []} )
+      params.require(:profile).permit(:summery, :city, :country, :gender, :first_name, :last_name,
+                                      :company, :user_id , :avatar ,
+                                      {skill_ids: [], job_ids: [], industry_ids: []} )
     end
 
    def authorized_user
