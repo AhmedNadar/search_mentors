@@ -1,0 +1,40 @@
+<section class="search-result">
+  <div class="container">
+    <div class="row flex-container">
+      <% @profiles.each do |profile| %>
+        <div class="col-md-5 mentor-profile">
+          <div class="media">
+            <div class="media-left">
+              <%= link_to profile do %>
+                <%= image_tag profile.avatar.url(:thumb) %>
+              <% end %>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%=link_to profile do %>
+                  <%= "#{profile.first_name }" " #{ profile.last_name}" %>
+                <% end %>
+              </h4>
+              <strong>Works at <%= profile.company %></strong>
+              <p><%= profile.city %>, <%= profile.country %></p>
+            </div>
+          </div>
+          <div class="dvider"></div>
+          <div class="profile-section">
+            <h5>SUMMARY</h5>
+            <p><%= profile.summary %></p>
+          </div>
+          <div class="profile-section">
+            <h5>SPECIALIZED SKILLS</h5>
+            <p><%= profile.skills.map(&:name).join(', ') %></p>
+          </div>
+          <div class="profile-section">
+            <h5>CRITERIA MET</h5>
+            <p>NEED TO WORK ON IT....</p>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

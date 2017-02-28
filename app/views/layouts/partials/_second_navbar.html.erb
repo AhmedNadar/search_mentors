@@ -19,8 +19,10 @@
           <li class="<%= active_class(profile_path(current_user.profile)) %>">
             <%= link_to 'MY PROFILE', profile_path(current_user.profile) %>
           </li>
+          <li class="<%= active_class(profiles_path) %>">
+            <%= link_to 'FIND A MENTOR', profiles_path %>
+          </li>
         <% end %>
-        <li><a href="#">FIND A MENTOR</a></li>
         <li><a href="#">FIND A MENTEE</a></li>
         <li><a href="#">RELATIONSHIPS</a></li>
         <li><a href="#">RESOURCES</a></li>

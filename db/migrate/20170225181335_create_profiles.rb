@@ -4,7 +4,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.string :first_name,   index: true
       t.string :last_name,    index: true
       t.string :company,      index: true
-      t.text   :summery,      index: true
+      t.text   :summary,      index: true
       t.string :city,         index: true
       t.string :country,      index: true
       t.string :gender,       index: true

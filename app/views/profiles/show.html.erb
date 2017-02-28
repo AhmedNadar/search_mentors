@@ -1,95 +1,97 @@
-<%= content_for :page_title, @profile.first_name.capitalize + " profile"%>
-<article id="profile" class="profile">
-  <div class="row">
-    <h2 class="page-header">Welcome, <%= @profile.first_name.capitalize %> </h2>
-  </div>
-  <div class="row">
-    <section class="left-side">
-      <div class="col-md-3">
-          <%= image_tag @profile.avatar.url(:medium), class:"avatar" %>
-        <h3><%= fullname %></h3>
-        <h4>Works at: <%= @profile.company.capitalize %></h4>
 
-        <% if user_signed_in? %>
-          <% if @profile.user_id == current_user.id %>
-            <%= link_to 'Edit my profile', edit_profile_path, class:"btn btn-info", role:"button" %>
+<article id="profile" class="profile container">
+  <div class="container-fluid">
+    <div class="row">
+      <h2 class="page-header">Welcome, <%= @profile.first_name.capitalize %> </h2>
+    </div>
+    <div class="row">
+      <section class="left-side">
+        <div class="col-md-3">
+            <%= image_tag @profile.avatar.url(:medium), class:"avatar" %>
+          <h3><%= fullname %></h3>
+          <h4>Works at: <%= @profile.company.capitalize %></h4>
+
+          <% if user_signed_in? %>
+            <% if @profile.user_id == current_user.id %>
+              <%= link_to 'Edit my profile', edit_profile_path, class:"btn btn-info", role:"button" %>
+            <% end %>
           <% end %>
-        <% end %>
 
-      </div>
-    </section>
-
-    <section class="right-side">
-      <div class="col-md-8">
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h3>About...</h3></div>
-
-          <!-- List group -->
-          <ul class="list-group">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td style="width: 20%;"><strong>Email:</strong></td>
-                  <td><%=mail_to @profile.user.email %></td>
-                </tr>
-                <tr>
-                  <td style="width: 20%;"><strong>City:</strong></td>
-                  <td><%= @profile.city.capitalize %></td>
-                </tr>
-                <tr>
-                  <td style="width: 20%;"><strong>Country:</strong></td>
-                  <td><%= @profile.country.capitalize %></td>
-                </tr>
-                <tr>
-                  <td style="width: 20%;"><strong>Gender:</strong></td>
-                  <td><%= @profile.gender.capitalize %></td>
-                </tr>
-              </tbody>
-            </table>
-          </ul>
         </div>
+      </section>
 
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h3>Summery</h3></div>
-          <div class="panel-body">
-            <p><%= @profile.summery %></p>
+      <section class="right-side">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>About...</h3></div>
+
+            <!-- List group -->
+            <ul class="list-group">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td style="width: 20%;"><strong>Email:</strong></td>
+                    <td><%=mail_to @profile.user.email %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%;"><strong>City:</strong></td>
+                    <td><%= @profile.city.capitalize %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%;"><strong>Country:</strong></td>
+                    <td><%= @profile.country.capitalize %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 20%;"><strong>Gender:</strong></td>
+                    <td><%= @profile.gender.capitalize %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </ul>
           </div>
-          <!-- List group -->
-        </div>
 
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h3>Skills</h3></div>
-          <div class="panel-body">
-            <p><%= @profile.skills.map(&:name).join(' , ') %></p>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>Summary</h3></div>
+            <div class="panel-body">
+              <p><%= @profile.summary %></p>
+            </div>
+            <!-- List group -->
           </div>
-          <!-- List group -->
-        </div>
 
-
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h3>Jobs</h3></div>
-          <div class="panel-body">
-            <p> <%= @profile.jobs.map(&:name).join(' , ') %></p>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>Skills</h3></div>
+            <div class="panel-body">
+              <p><%= @profile.skills.map(&:name).join(' , ') %></p>
+            </div>
+            <!-- List group -->
           </div>
-          <!-- List group -->
-        </div>
 
 
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h3>Skills</h3></div>
-          <div class="panel-body">
-            <p><%= @profile.industries.map(&:name).join(' , ') %></p>
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>Jobs</h3></div>
+            <div class="panel-body">
+              <p> <%= @profile.jobs.map(&:name).join(' , ') %></p>
+            </div>
+            <!-- List group -->
           </div>
-          <!-- List group -->
+
+
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>Industries</h3></div>
+            <div class="panel-body">
+              <p><%= @profile.industries.map(&:name).join(' , ') %></p>
+            </div>
+            <!-- List group -->
+          </div>
+
+
         </div>
-
-
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </article>

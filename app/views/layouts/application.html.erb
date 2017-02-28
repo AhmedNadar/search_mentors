@@ -6,22 +6,26 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header class="navbar navbar-static-top first-header">
-      <div class="container">
-        <%= render 'layouts/partials/first_navbar' %>
-      </div>
-    </header>
+  <body class=site>
+    <div class="headers">
+        <header class="navbar navbar-static-top first-header">
+          <div class="container">
+            <%= render 'layouts/partials/first_navbar' %>
+          </div>
+        </header>
 
-    <header class="navbar navbar-static-top second-header">
-      <div class="container">
-        <%= render 'layouts/partials/second_navbar' %>
+        <header class="navbar navbar-static-top second-header">
+          <div class="container">
+            <%= render 'layouts/partials/second_navbar' %>
+          </div>
+        </header>
       </div>
-    </header>
-    <div class="container">
-      <%= yield %>
-    </div>
-
+      <div class="content">
+        <%= yield %>
+      </div>
+      <footer class="footer">
+        <p>Mentor City</p>
+      </footer>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

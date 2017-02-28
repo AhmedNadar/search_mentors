@@ -1,42 +1,58 @@
-<p id="notice"><%= notice %></p>
+<article id="all-profiles" class="all-profiles">
+  <div class="container-fluid" id="profile_filter">
+    <section class="top-search">
+      <div class="container">
 
-<h1>Profiles</h1>
+      <%= form_tag @filter, :method => :get do %>
+        <%= select_tag "skills_id", options_from_collection_for_select(Skill.all, "id", "name"), prompt: "Specialized Skills" %>
+        <%= select_tag "industries_id", options_from_collection_for_select(Industry.all, "id", "name"), prompt: "Industries" %>
+        <%= select_tag "jobs_id", options_from_collection_for_select(Job.all, "id", "name"), prompt: "Job Functions" %>
+        <%= submit_tag "FILTER RESULTS", name: nil, class:"btn btn-primary" %>
+      <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Company</th>
-      <th>Summery</th>
-      <th>City</th>
-      <th>Country</th>
-      <th>Gender</th>
-      <th>Avatar</th>
-      <th>skills</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
+      </div>
+    </section>
 
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <tr>
-        <td><%= profile.first_name %></td>
-        <td><%= profile.last_name %></td>
-        <td><%= profile.company %></td>
-        <td><%= profile.summery %></td>
-        <td><%= profile.city %></td>
-        <td><%= profile.country %></td>
-        <td><%= profile.gender %></td>
-        <td>
-          <% profile.skills.each do |skill| %>
-            <%= skill.name %>
+    <section class="search-result">
+      <div class="container">
+        <div class="row flex-container">
+          <% @profiles.each do |profile| %>
+            <div class="col-md-5 mentor-profile">
+              <div class="media">
+                <div class="media-left">
+                  <%= link_to profile do %>
+                    <%= image_tag profile.avatar.url(:thumb) %>
+                  <% end %>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    <%=link_to profile do %>
+                      <%= "#{profile.first_name }" " #{ profile.last_name}" %>
+                    <% end %>
+                  </h4>
+                  <strong>Works at <%= profile.company %></strong>
+                  <p><%= profile.city %>, <%= profile.country %></p>
+                </div>
+              </div>
+              <div class="dvider"></div>
+              <div class="profile-section">
+                <h5>SUMMARY</h5>
+                <p><%= profile.summary %></p>
+              </div>
+              <div class="profile-section">
+                <h5>SPECIALIZED SKILLS</h5>
+                <p><%= profile.skills.map(&:name).join(', ') %></p>
+              </div>
+              <div class="profile-section">
+                <h5>CRITERIA MET</h5>
+                <p>NEED TO WORK ON IT....</p>
+              </div>
+
+            </div>
           <% end %>
+        </div>
+      </div>
+    </section>
 
-        </td>
-        <td><%= image_tag profile.avatar.url(:thumb) %></td>
-        <td><%= link_to 'Show Profile', profile_path(profile) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  </div>
+</article>

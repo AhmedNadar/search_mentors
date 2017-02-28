@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
 
       # We know that the user has been persisted to the database, so now we can create our empty profile
-      resource.create_profile!
+      resource.build_profile
 
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
@@ -38,9 +38,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
 
-    # if resource.save
-    #   resource.create_profile
-    # end
+    if resource.save
+      resource.create_profile
+    end
   end
 
 

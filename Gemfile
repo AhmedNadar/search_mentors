@@ -25,6 +25,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'nprogress-rails'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem "font-awesome-rails"
+gem 'ransack'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

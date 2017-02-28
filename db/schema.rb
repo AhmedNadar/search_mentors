@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170226213140) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "company"
-    t.text     "summery"
+    t.text     "summary"
     t.string   "city"
     t.string   "country"
     t.string   "gender"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170226213140) do
     t.index ["first_name"], name: "index_profiles_on_first_name", using: :btree
     t.index ["gender"], name: "index_profiles_on_gender", using: :btree
     t.index ["last_name"], name: "index_profiles_on_last_name", using: :btree
-    t.index ["summery"], name: "index_profiles_on_summery", using: :btree
+    t.index ["summary"], name: "index_profiles_on_summary", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 

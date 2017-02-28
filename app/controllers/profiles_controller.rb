@@ -3,15 +3,16 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!,  except: [:index, :show]
   before_action :authorized_user,     only:   [:edit, :update, :destroy]
 
-  # GET /profiles
-  # GET /profiles.json
   def index
     @profiles = Profile.all
+    # @profiles = @profiles.joins(:skills).where('skills.name = ?', params[:skill])
     @profiles = @profiles.first_name(params[:first_name]) if params[:first_name].present?
-    # @profiles = @profiles.skills(params[:skills]) if params[:skills].present?
+    @profiles = @profiles.skills(params[:skills]) if params[:skills].present?
   end
 
   def show
+    @profile = Profile.find(params[:id])
+    render :new if @profile.first_name.nil?
   end
 
   def new
@@ -21,6 +22,15 @@ class ProfilesController < ApplicationController
 
   def edit
   end
+
+  def filter
+    @profiles = Profile.all
+    @profiles = @profiles.joins(:skills).where('skills.name = ?', params[:skill])
+    @profiles = @profiles.joins(:industries).where('industries.name = ?', params[:industry])
+    @profiles = @profiles.joins(:jobs).where('job.name = ?', params[:job])
+    # render :js
+  end
+
   def create
     @profile = current_user.profile.build(profile_params)
     respond_to do |format|
